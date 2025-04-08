@@ -4,6 +4,15 @@ sap.ui.define([
     'use strict';
 
     return {
+        getDocumentUrl: function (url) {
+            const additionalUrl = this?.getEditFlow()?.getAppComponent()?._componentConfig?.url;
+            if (additionalUrl) {
+                return additionalUrl.slice(0, -1) + url;
+            } else {
+                return url;
+            }
+        },
+
         onEarningFileUploadChange: async function (oEvent) {
             const oFileUploader = oEvent.getSource();
             const oFile = oEvent.getParameter("files")[0];
@@ -29,11 +38,13 @@ sap.ui.define([
 
             const result = await readPromise;
 
+            const fileContent = result.split("base64,")[1];
+
             try {
                 const fileUrl = "/odata/v4/earning-upload-srv/EarningFiles(ID=<ID>,IsActiveEntity=true)/content";
                 oContext.setProperty("mediaType", oFile.type);
                 oContext.setProperty("fileName", oFile.name);
-                oContext.setProperty("content", result);
+                oContext.setProperty("content", fileContent);
                 oContext.setProperty("url", fileUrl.replace("<ID>", oContext.getProperty("ID")));
                 MessageToast.show("File uploaded successfully");
             } catch (err) {

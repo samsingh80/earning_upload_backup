@@ -10,9 +10,9 @@ annotate service.Banks with {
 annotate service.EarningFiles with @UI.HeaderInfo: {
   TypeName      : 'Earning File',
   TypeNamePlural: 'Earning Files',
-  Title : {
-      $Type : 'UI.DataField',
-      Value : bank_code,
+  Title         : {
+    $Type: 'UI.DataField',
+    Value: bank_code,
   },
 };
 
@@ -32,9 +32,9 @@ annotate service.EarningFiles with {
       Label         : 'Bank',
     }
   }
-  bank     @title: 'Bank';
-  year     @title: 'Year';
-  quarter  @title: 'Quarter';
+  bank    @title: 'Bank';
+  year    @title: 'Year';
+  quarter @title: 'Quarter';
 };
 
 annotate service.EarningFiles with @UI.LineItem: [
@@ -89,3 +89,8 @@ annotate service.EarningFiles with @UI.Facets: [{
   Label : 'General Information',
   Target: '@UI.FieldGroup#Main'
 }];
+
+annotate service.EarningFiles with @(Common.SideEffects: {
+  SourceProperties: [content],
+  TargetEntities  : ['/EarningUploadSrv.EntityContainer/EarningFiles'],
+});

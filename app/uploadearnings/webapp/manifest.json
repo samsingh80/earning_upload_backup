@@ -129,7 +129,8 @@
                     "type": "ResponsiveTable"
                   }
                 }
-              }
+              },
+              "initialLoad": "Enabled"
             }
           }
         },
@@ -160,7 +161,7 @@
                         "anchor": "UploadEarningDocument"
                       },
                       "title": "Earning Document",
-                      "visible": "{= %{url} !== null}"
+                      "visible": "{= %{url} !== null && %{IsActiveEntity}}"
                     }
                   }
                 }

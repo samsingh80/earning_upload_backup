@@ -1,6 +1,46 @@
 {
-  "scopes": [],
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Earning_Admin",
+      "description": "Earning Upload Admin"
+    },
+    {
+      "name": "$XSAPPNAME.Earning_Viewer",
+      "description": "Earning Upload Viewer"
+    }
+  ],
   "attributes": [],
-  "role-templates": [],
+  "role-templates": [
+    {
+      "name": "Earning_Admin",
+      "description": "Earning Upload Admin",
+      "scope-references": [
+        "$XSAPPNAME.Earning_Admin"
+      ]
+    },
+    {
+      "name": "Earning_Viewer",
+      "description": "Earning Upload Viewer",
+      "scope-references": [
+        "$XSAPPNAME.Earning_Viewer"
+      ]
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "Earning_Admin",
+      "description": "Earning Upload Admin",
+      "role-template-references": [
+        "$XSAPPNAME.Earning_Admin"
+      ]
+    },
+    {
+      "name": "Earning_Viewer",
+      "description": "Earning Upload Viewer",
+      "role-template-references": [
+        "$XSAPPNAME.Earning_Viewer"
+      ]
+    }
+  ],
   "authorities-inheritance": false
 }

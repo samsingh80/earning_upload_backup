@@ -1,10 +1,16 @@
 const cds = require("@sap/cds");
-const { Readable, PassThrough } = require("stream");
+const { Readable } = require("stream");
 
 module.exports = cds.service.impl((srv) => {
     const entities = srv.entities;
 
-    srv.on('READ', 'EarningFiles', async (req, next) => {
+    srv.on("READ", "VisibilityConfig", async (req) => {
+        req.reply({
+            isAdmin: req.user.is("Earning_Admin"),
+        });
+    });
+
+    srv.on('READ', ['EarningFiles', 'EarningFiles.drafts'], async (req, next) => {
         if (!req.data.ID) {
             return next();
         }
@@ -13,6 +19,7 @@ module.exports = cds.service.impl((srv) => {
         //If the request url contains keyword "content"
         // then read the media content
         if (url.includes("content")) {
+            console.log("Fetching media content for ID:", req.data.ID);
             // Fetch the media obj from database
             var mediaObj = await SELECT.one.from("EarningFiles").columns("content", "mediaType").where({
                 ID: req.data.ID
@@ -22,13 +29,21 @@ module.exports = cds.service.impl((srv) => {
                 return;
             }
             var decodedMedia = "";
-            decodedMedia = new Buffer.from(
-                mediaObj?.content?.toString()?.split(";base64,").pop(),
-                "base64"
-            );
+            decodedMedia = await streamToBuffer(mediaObj?.content);
+            console.log("Media content fetched successfully for ID:", req.data.ID);
             return _formatResult(decodedMedia, mediaObj.mediaType);
         } else return next();
     });
+
+    // Helper function to convert Readable stream to Buffer
+    function streamToBuffer(stream) {
+        return new Promise((resolve, reject) => {
+            const chunks = [];
+            stream.on('data', chunk => chunks.push(chunk));
+            stream.on('end', () => resolve(Buffer.concat(chunks)));
+            stream.on('error', err => reject(err));
+        });
+    }
 
     function _formatResult(decodedMedia, mediaType) {
         const readable = new Readable();

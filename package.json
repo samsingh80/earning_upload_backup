@@ -48,7 +48,20 @@
     "requires": {
       "auth": {
         "[development]": {
-          "kind": "dummy"
+          "kind": "basic",
+          "users": {
+            "alice": {
+              "roles": [
+                "Earning_Viewer",
+                "Earning_Admin"
+              ],
+              "attr": {
+                "givenName": "Alice",
+                "familyName": "Doe",
+                "email": "alice@sap.com"
+              }
+            }
+          }
         },
         "[production]": {
           "kind": "xsuaa"

@@ -15,11 +15,17 @@ entity EarningFiles : cuid, managed {
   year      : String(4);
   quarter   : String(2);
 
-  @Core.MediaType         : mediaType
+  @Core.MediaType  : mediaType
   content   : LargeBinary;
 
-  @Core.IsMediaType       : true
+  @Core.IsMediaType: true
   mediaType : String;
   fileName  : String;
   url       : String;
+}
+
+@odata.singleton  @cds.persistency.skip
+entity VisibilityConfig {
+  key ID      : String;
+      isAdmin : Boolean;
 }
