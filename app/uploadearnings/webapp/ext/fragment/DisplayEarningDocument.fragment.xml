@@ -17,7 +17,7 @@
         </FlexBox>
         <PDFViewer
             id="idDisplayEarningDocument"
-            source="{url}"
+            source="{configs>/additionalUrl}{url}"
             title="{fileName}"
             height="50rem"
             isTrustedSource="true"
