@@ -16,10 +16,6 @@ entity EarningFiles : cuid, managed {
   quarter   : String(2);
 
   @Core.MediaType         : mediaType
-  @Core.ContentDisposition: {
-    Type    : 'inline',
-    Filename: fileName
-  }
   content   : LargeBinary;
 
   @Core.IsMediaType       : true

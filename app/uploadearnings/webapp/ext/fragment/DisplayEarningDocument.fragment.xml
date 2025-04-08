@@ -9,6 +9,7 @@
             source="{url}"
             title="{fileName}"
             height="50rem"
+            isTrustedSource="true"
         />
     </VBox>
 </core:FragmentDefinition>
