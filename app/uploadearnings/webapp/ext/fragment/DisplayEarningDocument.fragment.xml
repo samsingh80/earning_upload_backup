@@ -8,19 +8,19 @@
             alignContent="End"
             justifyContent="End"
         >
-            <Link
+            <!-- <Link
                 text="View Earning Document"
                 target="_blank"
                 href="{url}"
                 class="sapUiSmallMargin"
-            />
+            /> -->
         </FlexBox>
-        <PDFViewer
+        <!-- <PDFViewer
             id="idDisplayEarningDocument"
             source="{configs>/additionalUrl}{url}"
             title="{fileName}"
             height="50rem"
             isTrustedSource="true"
-        />
+        /> -->
     </VBox>
 </core:FragmentDefinition>

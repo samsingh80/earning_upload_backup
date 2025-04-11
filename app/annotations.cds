@@ -83,14 +83,42 @@ annotate service.EarningFiles with @UI.FieldGroup #Main: {
   ]
 };
 
-annotate service.EarningFiles with @UI.Facets: [{
-  $Type : 'UI.ReferenceFacet',
-  ID    : 'Main',
-  Label : 'General Information',
-  Target: '@UI.FieldGroup#Main'
-}];
+annotate service.EarningFiles with @UI.Facets: [
+  {
+    $Type : 'UI.ReferenceFacet',
+    ID    : 'Main',
+    Label : 'General Information',
+    Target: '@UI.FieldGroup#Main'
+  },
+  {
+    $Type : 'UI.ReferenceFacet',
+    Label : '{i18n>documents}',
+    ID    : 'Documents',
+    Target: 'documents/@UI.LineItem#Documents',
+  },
+];
 
-annotate service.EarningFiles with @(Common.SideEffects: {
-  SourceProperties: [content],
-  TargetEntities  : ['/EarningUploadSrv.EntityContainer/EarningFiles'],
+annotate service.Document with @(UI.HeaderInfo: {
+  Title         : {
+    $Type: 'UI.DataField',
+    Value: doc,
+  },
+  TypeName      : '{i18n>document}',
+  TypeNamePlural: '{i18n>documents}',
 });
+
+annotate service.Document with {
+  doc @title: '{i18n>document}'
+}
+
+annotate service.Document with @(UI.LineItem #Documents: [
+  {
+    Value                : doc,
+    ![@HTML5.CssDefaults]: {width: 'auto',
+    },
+  },
+  {Value: createdBy},
+  {Value: createdAt},
+  {Value: modifiedBy},
+  {Value: modifiedAt}
+]);

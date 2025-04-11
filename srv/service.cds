@@ -12,11 +12,15 @@ service EarningUploadSrv {
       to   : ['Earning_Admin']
     },
     {
-      grant: ['READ', ],
+      grant: ['READ',
+      ],
       to   : ['Earning_Viewer']
     },
   ])                      as projection on earning_upload.EarningFiles;
 
   entity Banks            as projection on earning_upload.Banks;
   entity VisibilityConfig as projection on earning_upload.VisibilityConfig;
+
+  @Capabilities: {SearchRestrictions.Searchable: false}
+  entity Document         as projection on earning_upload.Document;
 }
