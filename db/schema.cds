@@ -15,28 +15,13 @@ entity EarningFiles : cuid, managed {
   year      : String(4);
   quarter   : String(2);
 
-  // @Core.MediaType  : mediaType
-  // content   : LargeBinary;
+  @Core.MediaType  : mediaType
+  content   : LargeString;
 
-  // @Core.IsMediaType: true
-  // mediaType : String;
-  // fileName  : String;
-  // url       : String;
-  documents : Composition of many Document
-                on documents.idea = $self;
-}
-
-entity Document : cuid, managed {
-  doc            : LargeBinary
-                          @Core.MediaType         : docType
-                          @Core.ContentDisposition: {
-    Type    : 'inline',
-    Filename: fileName
-  };
-  docDescription : String(250);
-  docType        : String @Core.IsMediaType;
-  fileName       : String;
-  idea           : Association to EarningFiles;
+  @Core.IsMediaType: true
+  mediaType : String;
+  fileName  : String;
+  url       : String;
 }
 
 @odata.singleton  @cds.persistency.skip

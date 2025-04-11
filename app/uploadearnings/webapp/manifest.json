@@ -152,7 +152,7 @@
                         "anchor": "Main"
                       },
                       "title": "Upload Earning Document",
-                      "visible": "false"
+                      "visible": "{ui>/isEditable}"
                     },
                     "DisplayEarningDocument": {
                       "template": "com.scb.uploadearnings.ext.fragment.DisplayEarningDocument",
@@ -161,7 +161,7 @@
                         "anchor": "UploadEarningDocument"
                       },
                       "title": "Earning Document",
-                      "visible": "false"
+                      "visible": "{= %{url} !== null && %{IsActiveEntity}}"
                     }
                   }
                 }
