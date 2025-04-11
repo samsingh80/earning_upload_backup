@@ -23,5 +23,9 @@ service EarningUploadSrv {
                              order by
                                code asc;
 
+  entity Years            as projection on earning_upload.Years
+                             order by
+                               code asc;
+
   entity VisibilityConfig as projection on earning_upload.VisibilityConfig;
 }

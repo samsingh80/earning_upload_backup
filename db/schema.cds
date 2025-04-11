@@ -10,13 +10,17 @@ entity Banks : CodeList {
   key code : String(40);
 }
 
-entity Quarters : CodeList {
+entity Years : CodeList {
   key code : String(2);
+}
+
+entity Quarters : CodeList {
+  key code : String(4);
 }
 
 entity EarningFiles : cuid, managed {
   bank      : Association to Banks;
-  year      : String(4) default '2025';
+  year      : Association to Years default '2025';
   quarter   : Association to Quarters;
 
   @Core.MediaType  : mediaType

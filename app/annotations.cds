@@ -14,6 +14,13 @@ annotate service.Quarters with {
   }
 };
 
+annotate service.Years with {
+  code @Common.Text: {
+    $value                : name,
+    ![@UI.TextArrangement]: #TextOnly,
+  }
+};
+
 annotate service.EarningFiles with @UI.HeaderInfo: {
   TypeName      : 'Earning File',
   TypeNamePlural: 'Earning Files',
@@ -40,6 +47,21 @@ annotate service.EarningFiles with {
     }
   }
   bank    @title: 'Bank';
+  @Common: {
+    Text                    : year.name,
+    TextArrangement         : #TextOnly,
+    ValueListWithFixedValues: true,
+    ValueList               : {
+      $Type         : 'Common.ValueListType',
+      CollectionPath: 'Years',
+      Parameters    : [{
+        $Type            : 'Common.ValueListParameterInOut',
+        LocalDataProperty: year_code,
+        ValueListProperty: 'code',
+      }, ],
+      Label         : 'Year',
+    }
+  }
   year    @title: 'Year';
   @Common: {
     Text                    : quarter.name,
@@ -59,6 +81,12 @@ annotate service.EarningFiles with {
   quarter @title: 'Quarter';
 };
 
+annotate service.EarningFiles with @(UI.SelectionFields: [
+  bank_code,
+  year_code,
+  quarter_code
+]);
+
 annotate service.EarningFiles with @UI.LineItem: [
   {
     $Type                : 'UI.DataField',
@@ -67,7 +95,7 @@ annotate service.EarningFiles with @UI.LineItem: [
   },
   {
     $Type                : 'UI.DataField',
-    Value                : year,
+    Value                : year_code,
     ![@HTML5.CssDefaults]: {width: 'auto', },
   },
   {
@@ -96,7 +124,7 @@ annotate service.EarningFiles with @UI.FieldGroup #Main: {
     },
     {
       $Type: 'UI.DataField',
-      Value: year
+      Value: year_code
     },
     {
       $Type: 'UI.DataField',

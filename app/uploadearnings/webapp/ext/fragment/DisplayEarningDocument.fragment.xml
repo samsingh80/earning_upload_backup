@@ -4,17 +4,6 @@
     xmlns:macros="sap.fe.macros"
 >
     <VBox>
-        <FlexBox
-            alignContent="End"
-            justifyContent="End"
-        >
-            <Link
-                text="View Earning Document"
-                target="_blank"
-                href="{url}"
-                class="sapUiSmallMargin"
-            />
-        </FlexBox>
         <PDFViewer
             id="idDisplayEarningDocument"
             source="{configs>/additionalUrl}{url}"
