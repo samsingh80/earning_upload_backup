@@ -18,5 +18,14 @@ service EarningUploadSrv {
   ])                      as projection on earning_upload.EarningFiles;
 
   entity Banks            as projection on earning_upload.Banks;
+
+  entity Quarters         as projection on earning_upload.Quarters
+                             order by
+                               code asc;
+
+  entity Years            as projection on earning_upload.Years
+                             order by
+                               code asc;
+
   entity VisibilityConfig as projection on earning_upload.VisibilityConfig;
 }
