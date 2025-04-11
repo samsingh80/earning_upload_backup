@@ -7,6 +7,13 @@ annotate service.Banks with {
   }
 };
 
+annotate service.Quarters with {
+  code @Common.Text: {
+    $value                : name,
+    ![@UI.TextArrangement]: #TextOnly,
+  }
+};
+
 annotate service.EarningFiles with @UI.HeaderInfo: {
   TypeName      : 'Earning File',
   TypeNamePlural: 'Earning Files',
@@ -34,6 +41,21 @@ annotate service.EarningFiles with {
   }
   bank    @title: 'Bank';
   year    @title: 'Year';
+  @Common: {
+    Text                    : quarter.name,
+    TextArrangement         : #TextOnly,
+    ValueListWithFixedValues: true,
+    ValueList               : {
+      $Type         : 'Common.ValueListType',
+      CollectionPath: 'Quarters',
+      Parameters    : [{
+        $Type            : 'Common.ValueListParameterInOut',
+        LocalDataProperty: quarter_code,
+        ValueListProperty: 'code',
+      }, ],
+      Label         : 'Quarter',
+    }
+  }
   quarter @title: 'Quarter';
 };
 
@@ -50,7 +72,7 @@ annotate service.EarningFiles with @UI.LineItem: [
   },
   {
     $Type                : 'UI.DataField',
-    Value                : quarter,
+    Value                : quarter_code,
     ![@HTML5.CssDefaults]: {width: 'auto', },
   },
   {
@@ -78,7 +100,7 @@ annotate service.EarningFiles with @UI.FieldGroup #Main: {
     },
     {
       $Type: 'UI.DataField',
-      Value: quarter
+      Value: quarter_code
     },
   ]
 };
