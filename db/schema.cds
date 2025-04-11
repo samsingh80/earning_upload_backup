@@ -11,11 +11,11 @@ entity Banks : CodeList {
 }
 
 entity Years : CodeList {
-  key code : String(2);
+  key code : String(4);
 }
 
 entity Quarters : CodeList {
-  key code : String(4);
+  key code : String(2);
 }
 
 entity EarningFiles : cuid, managed {
