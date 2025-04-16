@@ -2,18 +2,25 @@ const cds = require("@sap/cds");
 const { Readable } = require("stream");
 
 module.exports = cds.service.impl((srv) => {
-  const entities = srv.entities;
+  const {VisibilityConfig} = srv.entities;
 
-  srv.on("READ", "VisibilityConfig", async (req) => {
+  srv.on("READ",VisibilityConfig, async (req) => {
     req.reply({
-      isAdmin: req.user.is("Earning_Admin"),
+      isAdmin: !req.user.is("Earning_Admin"),
     });
+
+    // let currentUser = await next();
+    // currentUser.isAdmin = req.user.is("Earning_Admin")
+    //   ? false
+    //   : true;
+    // return currentUser;
   });
 
   srv.on('READ', ['EarningFiles', 'EarningFiles.drafts'], async (req, next) => {
     if (!req.data.ID) {
       return next();
     }
+
     //Fetch the url from where the req is triggered
     const url = req._.req.path;
     //If the request url contains keyword "content"

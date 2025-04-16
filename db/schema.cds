@@ -23,6 +23,7 @@ entity EarningFiles : cuid, managed {
   year      : Association to Years default '2025';
   quarter   : Association to Quarters;
 
+
   @Core.MediaType  : mediaType
   content   : LargeString;
 
@@ -32,8 +33,8 @@ entity EarningFiles : cuid, managed {
   url       : String;
 }
 
-@odata.singleton  @cds.persistency.skip
-entity VisibilityConfig {
-  key ID      : String;
+@odata.singleton
+entity VisibilityConfig :cuid,{
+
       isAdmin : Boolean;
 }

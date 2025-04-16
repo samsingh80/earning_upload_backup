@@ -3,9 +3,10 @@ using {com.scb.earningupload as earning_upload} from '../db/schema.cds';
 @requires: 'authenticated-user'
 service EarningUploadSrv {
   @odata.draft.enabled
-  @UI.CreateHidden: {$edmJson: {$Not: {$Path: '/EarningUploadSrv.EntityContainer/VisibilityConfig/isAdmin'}}}
-  @UI.DeleteHidden: {$edmJson: {$Not: {$Path: '/EarningUploadSrv.EntityContainer/VisibilityConfig/isAdmin'}}}
-  @UI.UpdateHidden: {$edmJson: {$Not: {$Path: '/EarningUploadSrv.EntityContainer/VisibilityConfig/isAdmin'}}}
+  //@UI.CreateHidden: {$edmJson: {$Path: '/VisibilityConfig/isAdmin'}}
+  @UI.CreateHidden: {$edmJson:  {$Path: '/VisibilityConfig/isAdmin'}}
+  @UI.DeleteHidden: {$edmJson:  {$Path: '/VisibilityConfig/isAdmin'}}
+  @UI.UpdateHidden: {$edmJson:  {$Path: '/VisibilityConfig/isAdmin'}}
   entity EarningFiles @(restrict: [
     {
       grant: ['*'],
@@ -28,4 +29,6 @@ service EarningUploadSrv {
                                code asc;
 
   entity VisibilityConfig as projection on earning_upload.VisibilityConfig;
+
+
 }

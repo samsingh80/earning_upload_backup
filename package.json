@@ -49,8 +49,8 @@
           "users": {
             "alice": {
               "roles": [
-                "Earning_Viewer",
-                "Earning_Admin"
+                "Earning_Viewer"
+             
               ],
               "attr": {
                 "givenName": "Alice",
@@ -69,7 +69,7 @@
           "kind": "hana-cloud"
         },
         "[development]": {
-          "kind": "hana-cloud"
+          "kind": "sqlite"
         },
         "model": [
           "db",
