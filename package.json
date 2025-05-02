@@ -50,7 +50,6 @@
             "alice": {
               "roles": [
                 "Earning_Viewer"
-             
               ],
               "attr": {
                 "givenName": "Alice",
@@ -69,13 +68,21 @@
           "kind": "hana-cloud"
         },
         "[development]": {
-          "kind": "sqlite"
+          "kind": "hana-cloud"
         },
         "model": [
           "db",
           "srv"
         ]
       }
+    },
+    "server": {
+      "body_parser": {
+        "limit": "50mb"
+      }
+    },
+    "sql": {
+      "native_hana_associations": false
     }
   },
   "lcap": true,

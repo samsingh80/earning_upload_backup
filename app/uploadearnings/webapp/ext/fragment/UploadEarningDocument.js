@@ -41,7 +41,7 @@ sap.ui.define([
             const fileContent = result.split("base64,")[1];
 
             try {
-                const fileUrl = "/odata/v4/earning-upload-srv/EarningFiles(ID=<ID>,IsActiveEntity=true)/content";
+                const fileUrl = "./odata/v4/earning-upload-srv/EarningFiles(ID=<ID>,IsActiveEntity=true)/content";
                 oContext.setProperty("mediaType", oFile.type);
                 oContext.setProperty("fileName", oFile.name);
                 oContext.setProperty("content", fileContent);

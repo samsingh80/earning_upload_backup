@@ -30,5 +30,7 @@ service EarningUploadSrv {
 
   entity VisibilityConfig as projection on earning_upload.VisibilityConfig;
 
+  entity EmbeddingFiles as projection on earning_upload.EmbeddingFiles;
+
 
 }

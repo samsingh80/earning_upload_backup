@@ -18,6 +18,7 @@ entity Quarters : CodeList {
   key code : String(2);
 }
 
+@cds.server.body_parser.limit: '50mb'
 entity EarningFiles : cuid, managed {
   bank      : Association to Banks;
   year      : Association to Years default '2025';
@@ -32,6 +33,24 @@ entity EarningFiles : cuid, managed {
   fileName  : String;
   url       : String;
 }
+
+
+@cds.server.body_parser.limit: '50mb' 
+
+entity EmbeddingFiles @(odata.stream)  :  managed {
+
+  key ID: String;
+  @Core.MediaType: mediaType
+  content: LargeBinary ;
+
+  @Core.IsMediaType: true
+  mediaType : String;
+
+  fileName : String;
+  url      : String;
+  status   : String;
+}
+
 
 @odata.singleton
 entity VisibilityConfig :cuid,{
