@@ -7,16 +7,7 @@ service EarningUploadSrv {
   @UI.CreateHidden: {$edmJson:  {$Path: '/VisibilityConfig/isAdmin'}}
   @UI.DeleteHidden: {$edmJson:  {$Path: '/VisibilityConfig/isAdmin'}}
   @UI.UpdateHidden: {$edmJson:  {$Path: '/VisibilityConfig/isAdmin'}}
-  entity EarningFiles @(restrict: [
-    {
-      grant: ['*'],
-      to   : ['Earning_Admin']
-    },
-    {
-      grant: ['READ', ],
-      to   : ['Earning_Viewer']
-    },
-  ])                      as projection on earning_upload.EarningFiles;
+  entity EarningFiles as projection on earning_upload.EarningFiles;
 
   entity Banks            as projection on earning_upload.Banks;
 
@@ -31,6 +22,9 @@ service EarningUploadSrv {
   entity VisibilityConfig as projection on earning_upload.VisibilityConfig;
 
   entity EmbeddingFiles as projection on earning_upload.EmbeddingFiles;
+  entity FileStatusValues   as projection on earning_upload.FileStatusValues;
+
+
 
 
 }

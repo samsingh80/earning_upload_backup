@@ -7,7 +7,7 @@ module.exports = cds.service.impl((srv) => {
 
   srv.on("READ",VisibilityConfig, async (req) => {
     req.reply({
-      isAdmin: !req.user.is("Earning_Admin"),
+      isAdmin: req.user.is("T_ITO_EFDNA_GenAI_Earnings_Support"),
     });
 
     // let currentUser = await next();
@@ -77,10 +77,6 @@ module.exports = cds.service.impl((srv) => {
       return next();
     }
   });
-
-
-
-
 
   // Helper function to convert Readable stream to Buffer
   function streamToBuffer(stream) {

@@ -12,32 +12,16 @@
   "attributes": [],
   "role-templates": [
     {
-      "name": "Earning_Admin",
-      "description": "Earning Upload Admin",
+      "name": "T_ITO_EFDNA_GenAI_Earnings_Support",
+      "description": "T_ITO_EFDNA_GenAI_Earnings_Support",
       "scope-references": [
         "$XSAPPNAME.Earning_Admin"
       ]
     },
     {
-      "name": "Earning_Viewer",
-      "description": "Earning Upload Viewer",
+      "name": "T_SCB_EFDNA_GenAI_Earnings_Consumer",
+      "description": "T_SCB_EFDNA_GenAI_Earnings_Consumer",
       "scope-references": [
-        "$XSAPPNAME.Earning_Viewer"
-      ]
-    }
-  ],
-  "role-collections": [
-    {
-      "name": "Earning_Admin",
-      "description": "Earning Upload Admin",
-      "role-template-references": [
-        "$XSAPPNAME.Earning_Admin"
-      ]
-    },
-    {
-      "name": "Earning_Viewer",
-      "description": "Earning Upload Viewer",
-      "role-template-references": [
         "$XSAPPNAME.Earning_Viewer"
       ]
     }
