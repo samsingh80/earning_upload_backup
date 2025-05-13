@@ -24,7 +24,6 @@ entity EarningFiles : cuid, managed {
   year      : Association to Years default '2025';
   quarter   : Association to Quarters;
 
-
   @Core.MediaType  : mediaType
   content   : LargeString;
 
@@ -32,8 +31,8 @@ entity EarningFiles : cuid, managed {
   mediaType : String;
   fileName  : String;
   url       : String;
-
 }
+
 
 
 @cds.server.body_parser.limit: '50mb' 
@@ -87,10 +86,15 @@ type FileStatus : String enum {
   Test;
 };
 
-@odata.singleton
-entity VisibilityConfig :cuid,{
+// @odata.singleton
+// entity VisibilityConfig :cuid,{
+//       isAdmin : Boolean;
+// };
+@odata.singleton  @cds.persistency.skip
+entity VisibilityConfig {
+  key ID      : String;
       isAdmin : Boolean;
-};
+}
 @UI.LineItem: [{Value: code, Label: 'Status'}]
 @UI.SelectionFields: [{$value: code}]
 entity FileStatusValues {

@@ -6,7 +6,7 @@
     <VBox>
         <PDFViewer
             id="idDisplayEarningDocument"
-            source="{configs>/additionalUrl}"
+            source="{configs>/additionalUrl}{url}"
             title="{fileName}"
             height="50rem"
             isTrustedSource="true"

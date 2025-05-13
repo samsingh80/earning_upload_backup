@@ -10,8 +10,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/ui/model/json/JSONMod
 			 * @memberOf com.scb.uploadearnings.ext.controller.EarningObjectPageExtend
 			 */
 			onAfterRendering: function () {
-				// you can access the Fiori elements extensionAPI via this.base.getExtensionAPI
-				// var oModel = this.base.getExtensionAPI().getModel();
+
 				const additionalUrl = this.base.editFlow.getAppComponent()._componentConfig?.url?.slice(0, -1);
 				const additionalModel = new JSONModel({
 					additionalUrl: additionalUrl || ""

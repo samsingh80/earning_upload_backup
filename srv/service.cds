@@ -4,9 +4,12 @@ using {com.scb.earningupload as earning_upload} from '../db/schema.cds';
 service EarningUploadSrv {
   @odata.draft.enabled
   //@UI.CreateHidden: {$edmJson: {$Path: '/VisibilityConfig/isAdmin'}}
-  @UI.CreateHidden: {$edmJson:  {$Path: '/VisibilityConfig/isAdmin'}}
-  @UI.DeleteHidden: {$edmJson:  {$Path: '/VisibilityConfig/isAdmin'}}
-  @UI.UpdateHidden: {$edmJson:  {$Path: '/VisibilityConfig/isAdmin'}}
+  // @UI.CreateHidden: {$edmJson:  {$Path: '/VisibilityConfig/isAdmin'}}
+  // @UI.DeleteHidden: {$edmJson:  {$Path: '/VisibilityConfig/isAdmin'}}
+  // @UI.UpdateHidden: {$edmJson:  {$Path: '/VisibilityConfig/isAdmin'}}
+  @UI.CreateHidden: {$edmJson: {$Not: {$Path: '/EarningUploadSrv.EntityContainer/VisibilityConfig/isAdmin'}}}
+  @UI.DeleteHidden: {$edmJson: {$Not: {$Path: '/EarningUploadSrv.EntityContainer/VisibilityConfig/isAdmin'}}}
+  @UI.UpdateHidden: {$edmJson: {$Not: {$Path: '/EarningUploadSrv.EntityContainer/VisibilityConfig/isAdmin'}}} 
   entity EarningFiles as projection on earning_upload.EarningFiles;
 
   entity Banks            as projection on earning_upload.Banks;
@@ -23,8 +26,6 @@ service EarningUploadSrv {
 
   entity EmbeddingFiles as projection on earning_upload.EmbeddingFiles;
   entity FileStatusValues   as projection on earning_upload.FileStatusValues;
-
-
 
 
 }

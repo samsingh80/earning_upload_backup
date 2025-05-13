@@ -17,11 +17,11 @@ module.exports = cds.service.impl((srv) => {
     // return currentUser;
   });
 
-  srv.on('READ', ['EarningFiles', 'EarningFiles.drafts'], async (req, next) => {
+   // original read logic based on content
+   srv.on('READ', ['EarningFiles', 'EarningFiles.drafts'], async (req, next) => {
     if (!req.data.ID) {
       return next();
     }
-
     //Fetch the url from where the req is triggered
     const url = req._.req.path;
     //If the request url contains keyword "content"
@@ -47,6 +47,29 @@ module.exports = cds.service.impl((srv) => {
       return _formatResult(decodedMedia, mediaObj.mediaType);
     } else return next();
   });
+
+  // Helper function to convert Readable stream to Buffer
+  function streamToBuffer(stream) {
+    return new Promise((resolve, reject) => {
+      const chunks = [];
+      stream.on('data', chunk => chunks.push(chunk));
+      stream.on('end', () => resolve(Buffer.concat(chunks)));
+      stream.on('error', err => reject(err));
+    });
+  }
+
+  function _formatResult(decodedMedia, mediaType) {
+    const readable = new Readable();
+    const result = new Array();
+    readable.push(decodedMedia);
+    readable.push(null);
+    return {
+      value: readable,
+      '*@odata.mediaContentType': mediaType
+    }
+  }
+
+
 
   srv.on('READ', ['EmbeddingFiles'], async (req, next) => {
     if (!req.data.ID) {

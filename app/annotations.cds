@@ -113,6 +113,10 @@ annotate service.EarningFiles with @UI.LineItem: [
     Value                : createdAt,
     ![@HTML5.CssDefaults]: {width: 'auto', },
   },
+      {$Type: 'UI.DataFieldWithUrl',
+     Label: 'Download',
+     Value: fileName,
+     Url: url},
 ];
 
 annotate service.EarningFiles with @UI.FieldGroup #Main: {

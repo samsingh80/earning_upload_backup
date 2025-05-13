@@ -9,8 +9,8 @@
       "authenticationType": "none"
     },
     {
-      "source": "^v2/odata/v4/earning-upload-srv/(.*)$",
-      "target": "v2/odata/v4/earning-upload-srv/$1",
+      "source": "^/v2/odata/v4/earning-upload-srv/(.*)$",
+      "target": "/v2/odata/v4/earning-upload-srv/$1",
       "destination": "earning-upload-srv-api",
       "authenticationType": "none"
     },
