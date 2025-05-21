@@ -140,7 +140,7 @@ annotate service.EarningFiles with @UI.FieldGroup #Main: {
 annotate service.EarningFiles with @UI.Facets: [{
   $Type : 'UI.ReferenceFacet',
   ID    : 'Main',
-  Label : 'General Information',
+  Label : 'Bank Details',
   Target: '@UI.FieldGroup#Main'
 }];
 

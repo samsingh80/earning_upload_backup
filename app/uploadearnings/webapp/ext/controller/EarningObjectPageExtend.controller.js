@@ -16,7 +16,17 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension', "sap/ui/model/json/JSONMod
 					additionalUrl: additionalUrl || ""
 				});
 				this.getView().setModel(additionalModel, "configs");
-			}
+			},
+			onNavButtonPress: function () {
+				const oHistory = History.getInstance();
+				const sPreviousHash = oHistory.getPreviousHash();
+		  
+				if (sPreviousHash !== undefined) {
+				  window.history.go(-1);
+				} else {
+				  this.getAppComponent().getRouter().navTo("EarningFilesList", {}, true);
+				}
+			  }
 		}
 	});
 });

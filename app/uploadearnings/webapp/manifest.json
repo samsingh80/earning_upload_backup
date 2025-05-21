@@ -62,7 +62,8 @@
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
-        "sap.fe.templates": {}
+        "sap.fe.templates": {},
+        "sap.f": {}
       }
     },
     "contentDensities": {
@@ -94,17 +95,28 @@
       "css": []
     },
     "routing": {
-      "config": {},
+      "config": {
+        "flexibleColumnLayout": {
+          "defaultTwoColumnLayoutType": "TwoColumnsMidExpanded",
+          "defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+        },
+        "routerClass": "sap.f.routing.Router"
+      },
       "routes": [
         {
           "pattern": ":?query:",
           "name": "EarningFilesList",
-          "target": "EarningFilesList"
+          "target": [
+            "EarningFilesList"
+          ]
         },
         {
           "pattern": "EarningFiles({key}):?query:",
           "name": "EarningFilesObjectPage",
-          "target": "EarningFilesObjectPage"
+          "target": [
+            "EarningFilesList",
+            "EarningFilesObjectPage"
+          ]
         }
       ],
       "targets": {
@@ -132,7 +144,9 @@
               },
               "initialLoad": "Enabled"
             }
-          }
+          },
+          "controlAggregation": "beginColumnPages",
+          "contextPattern": ""
         },
         "EarningFilesObjectPage": {
           "type": "Component",
@@ -142,6 +156,9 @@
             "settings": {
               "editableHeaderContent": false,
               "contextPath": "/EarningFiles",
+              "navigation": {},
+              "showNavButton": true,
+              "navButtonPress": "onNavButtonPress",
               "content": {
                 "body": {
                   "sections": {
@@ -160,14 +177,16 @@
                         "placement": "After",
                         "anchor": "UploadEarningDocument"
                       },
-                      "title": "Earning Document",
+                      "title": "Standard Report",
                       "visible": "{= %{url} !== null && %{IsActiveEntity}}"
                     }
                   }
                 }
               }
             }
-          }
+          },
+          "controlAggregation": "midColumnPages",
+          "contextPattern": "/EarningFiles({key})"
         }
       }
     },
@@ -179,6 +198,12 @@
           }
         }
       }
+    },
+    "rootView": {
+      "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+      "type": "XML",
+      "async": true,
+      "id": "appRootView"
     }
   },
   "sap.fiori": {

@@ -59,7 +59,9 @@ entity EmbeddingFiles @(odata.stream)  :  managed {
   @Core.MediaType: mediaType
   content: LargeBinary ;
   @Core.IsMediaType: true
+  @UI.HiddenFilter
   mediaType : String;
+  @UI.HiddenFilter
   fileName : String;
   url      : String;
   @Consumption.filterable : true
@@ -74,7 +76,7 @@ entity EmbeddingFiles @(odata.stream)  :  managed {
   ]
 }
 @Common.ValueListWithFixedValues: true
-@Common.FilterDefaultValue: 'Completed'
+  @Common.FieldControl: #Mandatory
   status   : String(20);
     comments  : String;
 
