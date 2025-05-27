@@ -33,7 +33,7 @@ module.exports = cds.service.impl((srv) => {
       let tx = cds.transaction(req);
       // Fetch the media obj from database
       let mediaObj = await tx.run(
-        SELECT.one.from("com.scb.earningupload.EarningFiles", ["content", "mediaType"]).where(
+        SELECT.one.from("com.scb.earningupload.EarningFiles", ["content", "mediaType","fileName"]).where(
           "ID =",
           req.data.ID
         )
@@ -43,6 +43,14 @@ module.exports = cds.service.impl((srv) => {
         mediaObj.content,
         "base64"
       );
+
+      const res = req._.res;
+      res.setHeader("Content-Type", mediaObj.mediaType || "application/octet-stream");
+      console.log("filename" +mediaObj.fileName)
+    // Set content disposition with original filename
+    const safeFileName = encodeURIComponent(mediaObj.fileName || "download");
+    res.setHeader("Content-Disposition", `inline; filename="${safeFileName}"`);
+
       console.log("Media content fetched successfully for ID:", req.data.ID);
       return _formatResult(decodedMedia, mediaObj.mediaType);
     } else return next();
@@ -82,7 +90,7 @@ module.exports = cds.service.impl((srv) => {
   
       let tx = cds.transaction(req);
       let mediaObj = await tx.run(
-        SELECT.one.from("com.scb.earningupload.EmbeddingFiles", ["content", "mediaType"]).where({ ID: req.data.ID })
+        SELECT.one.from("com.scb.earningupload.EmbeddingFiles", ["content", "mediaType","fileName"]).where({ ID: req.data.ID })
       );
   
       if (!mediaObj || !mediaObj.content) {
@@ -90,6 +98,15 @@ module.exports = cds.service.impl((srv) => {
         req.reject(404, `No media content found for ID: ${req.data.ID}`);
         return;
       }
+
+      const res = req._.res;
+      res.setHeader("Content-Type", mediaObj.mediaType || "application/octet-stream");
+      console.log("filename" +mediaObj.fileName)
+    // Set content disposition with original filename
+    const safeFileName = encodeURIComponent(mediaObj.fileName || "download");
+    res.setHeader("Content-Disposition", `inline; filename="${safeFileName}"`);
+
+    console.log("Media content fetched and header set successfully for ID:", req.data.ID);
   
       // No Buffer.from needed anymore!
       let decodedMedia = mediaObj.content;  // already a Buffer
